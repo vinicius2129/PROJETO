@@ -138,6 +138,7 @@ app.get("/logout", (req, res) => {
   });
 });
 
+// registar usuario bd
 function registerUser(nome, email, senha, callback) {
   const query = "INSERT INTO users (nome, email, senha) VALUES (?, ?, ?)";
   db.query(query, [nome, email, senha], (err, result) => {
