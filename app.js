@@ -69,7 +69,7 @@ app.get("/pagina_login", (req, res) => {
 
 app.post("/pagina_login", (req, res) => {
   const { email, password } = req.body;
-  const query = "SELECT nome FROM users WHERE email = ? AND senha = ?"; //validar email e senha
+  const query = "SELECT nome FROM users WHERE email = ? AND senha = ?"; //validar email e senha db
   db.query(query, [email, password], (err, results) => {
     if (err) {
       console.error("Erro ao buscar usuário:", err);
@@ -140,7 +140,7 @@ app.get("/logout", (req, res) => {
 
 // registar usuario bd
 function registerUser(nome, email, senha, callback) {
-  const query = "INSERT INTO users (nome, email, senha) VALUES (?, ?, ?)";
+  const query = "INSERT INTO users (nome, email, senha) VALUES (?, ?, ?)"; //registrar usuarios no bd
   db.query(query, [nome, email, senha], (err, result) => {
     if (err) {
       console.error("Erro ao registrar usuário:", err);
@@ -185,7 +185,7 @@ app.post('/addTransicao', (req, res) => {
 // Rota para excluir um usuário
 app.get('/usuarios/excluir/:id', ensureAuthenticated, (req, res) => {
     const { id } = req.params;
-    const sql = 'DELETE FROM users WHERE id = ?';
+    const sql = 'DELETE FROM users WHERE id = ?'; //excluir usuarios no bd
     db.query(sql, [id], (err, result) => {
         if (err) {
             console.error('Erro ao excluir usuário:', err);
@@ -199,7 +199,7 @@ app.get('/usuarios/excluir/:id', ensureAuthenticated, (req, res) => {
 // Rota para exibir o formulário de atualização de usuários
 app.get('/usuarios/atualizar/:id', ensureAuthenticated, (req, res) => {
     const { id } = req.params;
-    const sql = 'SELECT * FROM users WHERE id = ?';
+    const sql = 'SELECT * FROM users WHERE id = ?'; //exibir usuarios no bd pelo do id
     db.query(sql, [id], (err, result) => {
         if (err) {
             console.error('Erro ao buscar usuário para atualização:', err);
@@ -217,7 +217,7 @@ app.get('/usuarios/atualizar/:id', ensureAuthenticated, (req, res) => {
 app.post('/usuarios/atualizar/:id', ensureAuthenticated, (req, res) => {
     const { id } = req.params;
     const { nome, email, senha } = req.body;
-    const sql = 'UPDATE users SET nome = ?, email = ?, senha = ? WHERE id = ?';
+    const sql = 'UPDATE users SET nome = ?, email = ?, senha = ? WHERE id = ?'; //atualizar usuarios no bd
     db.query(sql, [nome, email, senha, id], (err, result) => {
         if (err) {
             console.error('Erro ao atualizar usuário:', err);
