@@ -69,7 +69,7 @@ app.get("/pagina_login", (req, res) => {
 
 app.post("/pagina_login", (req, res) => {
   const { email, password } = req.body;
-  const query = "SELECT nome FROM users WHERE email = ? AND senha = ?";
+  const query = "SELECT nome FROM users WHERE email = ? AND senha = ?"; //validar email e senha
   db.query(query, [email, password], (err, results) => {
     if (err) {
       console.error("Erro ao buscar usuário:", err);
